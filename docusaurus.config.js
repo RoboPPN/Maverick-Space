@@ -5,17 +5,17 @@ const announcementBarContent = `<a href="/typescript-full-stack-technology-trpc"
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '愧怍的小站',
+  title: '小流硅步',
   titleDelimiter: '-',
-  url: 'https://kuizuo.cn',
+  url: 'https://roboppn.top',
   baseUrl: '/',
-  favicon: 'img/favicon.ico',
-  organizationName: 'kuizuo',
+  favicon: 'img/Q版深渊-3.png',
+  organizationName: 'RoboPPN',
   projectName: 'blog',
-  tagline: '记录所学知识，领略编程之美',
+  tagline: '积跬步成千里，积小流成江海',
   /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
   themeConfig: {
-    image: 'img/logo.png',
+    image: 'img/Q版深渊-3.png',
     announcementBar: {
       id: 'announcementBar-3',
       content: announcementBarContent,
@@ -23,7 +23,7 @@ const config = {
     metadata: [
       {
         name: 'keywords',
-        content: '愧怍',
+        content: '小流硅步',
       },
       {
         name: 'keywords',
@@ -40,11 +40,11 @@ const config = {
       },
     },
     navbar: {
-      title: '愧怍',
+      title: 'Maverick',
       logo: {
-        alt: '愧怍',
-        src: 'img/logo.webp',
-        srcDark: 'img/logo.webp',
+        alt: 'Maverick',
+        src: 'img/深渊3.png',
+        srcDark: 'img/Q版深渊-3.png',
       },
       hideOnScroll: true,
       items: [
