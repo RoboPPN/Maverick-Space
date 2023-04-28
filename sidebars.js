@@ -343,10 +343,10 @@ const sidebars = {
       label: '传感器',
       type: 'category',
       link: {
-        title: '逆向笔记',
-        description: 'Web逆向与安卓逆向笔记',
+        title: '传感器模块',
+        description: '传感器学习使用笔记',
         type: 'generated-index',
-        keywords: ['reverse', 'web', 'android', 'frida'],
+        keywords: ['sensor', 'LIDAR', 'cameraid', 'IMU', 'GPS'],
       },
       items: [
         {

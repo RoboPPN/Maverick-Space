@@ -6,7 +6,7 @@
 
 ## Livox Mid-70 静态配置
 1. 按下图连接好各个硬件设备。
-![请添加图片描述](https://img-blog.csdnimg.cn/c936773a868b4cb2aa7a8af37276339b.png)
+![请添加图片描述](img/LIVOX硬件连接图.png)
 
 2. 使用ifconfig查看自己的网口名称。
    
