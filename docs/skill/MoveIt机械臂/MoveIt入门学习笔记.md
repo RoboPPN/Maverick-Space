@@ -22,8 +22,37 @@
 3、驱动：使用 ArbotiX 或者 ros—control 功能包中的控制器插件，实现对机械臂关节的驱动。插件的使用方法一般分为两步：首先创建插件的 YAML 配置文件，然后通过 launch 文件启动插件并加载配置参数。
 4、控制：Movelt! 提供了 C++ 、Python 、rviz 插件等接口，可以实现机器人关节空间和工作空间下的运动规划，规划过程中会综合考虑场景信息，并实现自主避障的优化控制。
 
+## 三种方式实现抓取任务
+
+- 提前定义一系列的关节角值，这种方法需要我们把被抓取物体放在预定义的位置；
+- 通过逆运动学来抓取，需要手动提供被抓取物体的位姿；
+- 通过视觉伺服的方式来抓取，同样依赖逆运动学，不过是通过视觉来获取被抓取物体的位姿。
+
 ## MoveIt!系统框架
 
 ### 运动组（move_group）
 
 move_group: move_group是MoveIt!的核心部分,可以综合机器人的各独立组件,为用户提供 一系列需要的动作指令和服务。从架构图中我们可以看到,move_group本身并不具备丰富的功 能,主要做各功能包、插件的集成。它通过消息或服务的形式接收机器人上传的点云信息、joints 的状态消息,还有机器人的tf tree,另外还需要ROS的参数服务器提供机器人的运动学参数,这些 参数会在使用setup assistant的过程中根据机器人的URDF模型文件,创建生成(SRDF和配置文 件)。
+
+## MoveIt轨迹执行器
+
+MoveIt只是一个机械臂运动规划的框架，不负责驱动真实的机械臂，它是通过【轨迹执行器】来驱动机械臂的。
+【轨迹执行器】订阅的5个话题：
+/execute_trajectory/cancel
+/execute_trajectory/feedback
+/execute_trajectory/goal
+/execute_trajectory/result
+/execute_trajectory/status
+【轨迹执行者】是谁，谁就要提供这5个话题服务(这5个不是普通的topic，而是Action通信机制)
+Type: sensor_msgs/JointState
+
+Publishers:
+
+- /joint_state_publisher
+
+Subscribers:
+
+- /robot_state_publisher
+- /move_group
+
+发布关节状态控制真实机械臂运动
