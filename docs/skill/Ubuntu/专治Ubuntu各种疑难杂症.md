@@ -148,7 +148,7 @@ sudo nano /etc/apt/sources.list.d/ros-latest.list
 问题描述：我在jetson nano上的ubuntu18.04系统上写好了开机自动打开终端，并且提前已经给设备端口赋予了最高权限，并在终端上运行一个python代码，但每次开机终端都会报如下错误：
 
 ```bash
-Traceback (most recent call last):  File "final2.py", line 11, in <module>    mc = MyCobot("/dev/ttyACM0", 115200)  File "/home/agilex/.local/lib/python2.7/site-packages/pymycobot/mycobot.py", line 64, in __init__    self._serial_port.open()  File "/usr/lib/python2.7/dist-packages/serial/serialposix.py", line 268, in open    raise SerialException(msg.errno, "could not open port {}: {}".format(self._port, msg)) serial.serialutil.SerialException: [Errno 16] could not open port /dev/ttyACM0: [Errno 16] Device or resource busy: '/dev/ttyACM0'
+SerialException：[Errno 16] could not open port /dev/ttyACM0:[Errno 16] Device or resource busy: '/dev/ttyACM0'
 ```
 
 问题分析：这个错误表明在尝试打开串口设备`/dev/ttyACM0`时，发生了设备忙的错误。这可能是由于设备已经被其他程序或进程占用而导致的。
