@@ -142,3 +142,25 @@ sudo nano /etc/apt/sources.list.d/ros-latest.list
 8、最后，再次运行 sudo apt update 命令，应该不再报错。
 
 通过删除或注释掉重复的配置行，你消除了重复配置的问题，并允许系统正确更新软件包信息。
+
+## jetson Nano +ubuntu18.04 开机自启动问题
+
+问题描述：我在jetson nano上的ubuntu18.04系统上写好了开机自动打开终端，并且提前已经给设备端口赋予了最高权限，并在终端上运行一个python代码，但每次开机终端都会报如下错误：
+
+```bash
+Traceback (most recent call last):  File "final2.py", line 11, in <module>    mc = MyCobot("/dev/ttyACM0", 115200)  File "/home/agilex/.local/lib/python2.7/site-packages/pymycobot/mycobot.py", line 64, in __init__    self._serial_port.open()  File "/usr/lib/python2.7/dist-packages/serial/serialposix.py", line 268, in open    raise SerialException(msg.errno, "could not open port {}: {}".format(self._port, msg)) serial.serialutil.SerialException: [Errno 16] could not open port /dev/ttyACM0: [Errno 16] Device or resource busy: '/dev/ttyACM0'
+```
+
+问题分析：这个错误表明在尝试打开串口设备`/dev/ttyACM0`时，发生了设备忙的错误。这可能是由于设备已经被其他程序或进程占用而导致的。
+
+为了解决这个问题，你可以尝试以下几个步骤：
+
+1. 确保你的Python程序在终端中运行时，没有其他程序同时占用了串口设备`/dev/ttyACM0`。可能有其他的程序在后台自动启动并占用了该设备，导致你的程序无法打开。你可以使用命令`lsof /dev/ttyACM0`来检查是否有其他程序正在使用该设备。如果有，你可以尝试终止那些程序或者重新配置它们以释放串口设备。
+
+2. 在Jetson Nano上，可能会有一些系统服务或其他自动启动的进程在启动时就尝试访问串口设备。这些进程可能会与你的程序冲突。你可以尝试在你的Python程序运行之前延迟一段时间，以确保系统完全启动并释放了串口设备。你可以在程序开头使用`time.sleep()`函数来增加一个延迟。
+
+3. 检查串口设备的权限。虽然你已经给设备赋予了最高权限，但仍然可以确认一下。使用`ls -l /dev/ttyACM0`命令来检查设备的权限设置。确保你的用户具有读写设备的权限。
+
+4. 确保你的Python程序中没有其他地方同时打开了串口设备。如果在程序的其他部分或其他线程中也打开了同一个串口设备，可能会导致冲突。确保在程序中只有一个地方打开串口设备，并且其他部分不会再次尝试打开它。
+
+通过执行上述步骤，你应该能够解决串口设备忙的问题，并成功打开`/dev/ttyACM0`设备。
