@@ -17,7 +17,7 @@ SyntaxError: Non-ASCII character '\xe5' in file /home/ppn/agilex_ws/src/joint_st
 # -*- coding: utf-8 -*-
 ```
 
-这两行注释的作用是告诉Python解释器，使用UTF-8编码来解析源代码文件。你可以根据你的实际编码方式进行修改。
+这行注释的作用是告诉Python解释器，使用UTF-8编码来解析源代码文件。你可以根据你的实际编码方式进行修改。
 
 请注意，这些注释必须位于文件的开头，并且在任何其他代码之前。添加了这些注释之后，再次运行你的脚本应该就不会再出现这个错误了。
 
