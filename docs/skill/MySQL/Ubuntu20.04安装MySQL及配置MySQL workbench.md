@@ -1,6 +1,4 @@
-本文主要转载自：<https://blog.csdn.net/weixin_38924500/article/details/106261971>
-
-## 通过二进制安装MySQL服务（会安装最新版本）
+## 通过apt方式安装MySQL服务（会安装最新版本）
 
 1. 更新源
 
@@ -20,7 +18,7 @@
     sudo mysql_secure_installation
     ```
 
-​  配置项较多，如下所示：
+  配置项较多，如下所示：
 
 \#1
 
@@ -57,7 +55,7 @@ Re-enter new password: (重复输入)
   ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'mynewpassword';
   ```
 
-​ - 然后重复第二步输入密码即可。
+ - 然后重复第二步输入密码即可。
 
 \#3
 
@@ -99,7 +97,42 @@ Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Y (选�
 systemctl status mysql.service
 ```
 
+
+
+## 安装配置MySQL workbench
+
+1. 安装MySQL workbench
+  安装包下载地址如下：https://dev.mysql.com/downloads/workbench/
+
+2. 要安装 Workbench 的社区版本，请运行以下命令。 
+
+  ```
+  sudo apt install mysql-workbench-community
+  ```
+
+如果您想从命令行打开它，只需键入：
+
+```
+mysql-workbench
+```
+
+3. 使用dpkg安装workbench，中间可能会有依赖报错，使用以下命令安装其依赖项：
+
+```bash
+sudo apt -f install
+```
+
+
+
+## MySQL workbench使用教程
+
+
+
+
+
 ## 参考致谢
 
 - [Ubuntu20.04安装Mysql（亲测有效，一定要按步骤来）](https://blog.csdn.net/YM_1111/article/details/107555383)
 - [Ubuntu20.04安装Mysql](https://blog.csdn.net/weixin_38924500/article/details/106261971)
+
+- [Ubuntu20.04安装MySQL及配置MySQL workbench](https://blog.csdn.net/weixin_46584887/article/details/121432061)
