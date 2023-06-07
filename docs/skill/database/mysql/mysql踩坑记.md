@@ -23,7 +23,6 @@ ERROR 1045 (28000): Access denied for user 'agx-ppn'@'localhost' (using password
 1. 使用具有root权限的用户连接到MySQL服务器。在终端中输入以下命令：
 
    ```bash
-   cssCopy code
    mysql -u root -p
    ```
 
@@ -34,7 +33,6 @@ ERROR 1045 (28000): Access denied for user 'agx-ppn'@'localhost' (using password
 3. 查看用户权限：执行以下SQL语句，将`username`替换为你要查看的用户名：
 
    ```bash
-   sqlCopy code
    SHOW GRANTS FOR 'username'@'localhost';
    ```
 
@@ -43,7 +41,6 @@ ERROR 1045 (28000): Access denied for user 'agx-ppn'@'localhost' (using password
 4. 修改用户权限：如果你确定用户需要更高的权限，请使用以下SQL语句修改用户权限，将`username`替换为要修改的用户名，`localhost`替换为主机名或IP地址，`privileges`替换为你要赋予的具体权限：
 
    ```bash
-   sqlCopy code
    GRANT privileges ON database_name.* TO 'username'@'localhost';
    ```
 
@@ -52,14 +49,12 @@ ERROR 1045 (28000): Access denied for user 'agx-ppn'@'localhost' (using password
 5. 修改完成后，使用以下命令刷新权限：
 
    ```bash
-   Copy code
    FLUSH PRIVILEGES;
    ```
 
 6. 最后，你可以退出MySQL命令行界面：
 
    ```bash
-   bashCopy code
    exit;
    ```
 
@@ -76,7 +71,6 @@ mysql> CREATE TABLE students (    -> student_id INT UNSIGNED,    -> name VARCHAR
 1. 列出当前存在的数据库：在MySQL命令行界面输入以下命令：
 
    ```bash
-   sqlCopy code
    SHOW DATABASES;
    ```
 
@@ -85,21 +79,19 @@ mysql> CREATE TABLE students (    -> student_id INT UNSIGNED,    -> name VARCHAR
 2. 选择一个数据库：从列出的数据库中选择一个你想要使用的数据库，使用以下命令选择数据库，将`database_name`替换为你要使用的数据库名：
 
    ```bash
-   Copy code
    USE database_name;
    ```
 
    例如，如果你要选择名为`mydatabase`的数据库，可以使用以下命令：
 
    ```bash
-   Copy code
    USE mydatabase;
    ```
 
 3. 确保你已经成功选择了数据库后，再执行创建表的操作。在MySQL命令行界面输入你的创建表的SQL语句：
 
    ```bash
-   sqlCopy codeCREATE TABLE students (
+   CREATE TABLE students (
    student_id INT UNSIGNED,
    name VARCHAR(30),
    sex CHAR(1),
@@ -119,7 +111,6 @@ mysql> CREATE TABLE students (    -> student_id INT UNSIGNED,    -> name VARCHAR
 1. 打开MySQL命令行界面：在终端或命令提示符中输入以下命令并按回车键：
 
    ```bash
-   cssCopy code
    mysql -u root -p
    ```
 
@@ -130,21 +121,18 @@ mysql> CREATE TABLE students (    -> student_id INT UNSIGNED,    -> name VARCHAR
 3. 创建数据库：在MySQL命令行界面输入以下命令来创建一个新的数据库，将`database_name`替换为你想要的数据库名：
 
    ```bash
-   sqlCopy code
    CREATE DATABASE database_name;
    ```
 
    例如，要创建一个名为`mydatabase`的数据库，可以使用以下命令：
 
    ```bash
-   sqlCopy code
    CREATE DATABASE mydatabase;
    ```
 
 4. 确认数据库创建成功：执行以下命令来列出所有已创建的数据库：
 
    ```bash
-   sqlCopy code
    SHOW DATABASES;
    ```
 
@@ -153,7 +141,6 @@ mysql> CREATE TABLE students (    -> student_id INT UNSIGNED,    -> name VARCHAR
 5. 最后，你可以退出MySQL命令行界面：
 
    ```bash
-   sqlCopy code
    exit;
    ```
 
