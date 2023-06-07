@@ -2,14 +2,14 @@
 id: mysql-note
 slug: /skill/database/mysql
 title: MySql笔记
-date: 2020-12-30
+date: 2023-06-01
 tags: [mysql, database]
 keywords: [mysql, database]
 ---
 
 ## 1、前言
 
-比较少写这种文章，主要还是我 mysql 没系统化学习过，在写这篇前也只会 CRUD​，​ 也不会 ​ 数据 ​ 库 ​ 设计:pensive:，加上期末考正好要考 mysql，正好借这个机会重学一遍，顺便来记录一下这段学习中的一些 mysql 的操作。
+项目需要使用到数据库，记录一下，其中里面有 愧怍 先前写下的笔记，具体可翻阅：https://kuizuo.cn/docs/skill/database/mysql
 
 ## 2、操作数据库
 
@@ -114,10 +114,10 @@ PRIMARY KEY 主键一张表只有唯一的主键
 
 ```sql
 CREATE TABLE IF NOT EXISTS `user` (
-	`id` INT(10) NOT NULL AUTO_INCREMENT COMMENT '用户id',
-	`username` VARCHAR(30) NOT NULL COMMENT '用户名',
+ `id` INT(10) NOT NULL AUTO_INCREMENT COMMENT '用户id',
+ `username` VARCHAR(30) NOT NULL COMMENT '用户名',
     `password` VARCHAR(30) NOT NULL COMMENT '密码',
-	PRIMARY KEY(`id`)
+ PRIMARY KEY(`id`)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 ```
 
@@ -125,10 +125,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 ```sql
 CREATE TABLE [IF NOT EXISTS] `表名` (
-	`字段名` 列类型 [属性] [索引] [注释],
-	`字段名` 列类型 [属性] [索引] [注释],
+ `字段名` 列类型 [属性] [索引] [注释],
+ `字段名` 列类型 [属性] [索引] [注释],
     `字段名` 列类型 [属性] [索引] [注释],
-	PRIMARY KEY(` `)
+ PRIMARY KEY(` `)
 )[表类型] [字符集设置] [注释]
 
 ```
@@ -154,7 +154,7 @@ CREATE TABLE [IF NOT EXISTS] `表名` (
 MySQL 引擎在物理文件上的区别
 
 - INNODB 在数据库表中只有一个 \*.frm 文件(表结构定义文件) 以及上级目录下的 ibdata1 文件
-- MYISM 对应文件 有*.frm 文件 *.MYD 文件(数据文件) \*.MYI 文件(索引文件)
+- MYISM 对应文件 有*.frm 文件*.MYD 文件(数据文件) \*.MYI 文件(索引文件)
 
 设置数据库表的字符集编码
 
@@ -387,15 +387,15 @@ SELECT now() --查询当前时间
 -- 查询用户所属角色
 SELECT u.*,r.role
 FROM `user` u
-	LEFT JOIN user_role ur ON u.id = ur.user_id
-	LEFT JOIN role r ON r.id = ur.user_id
+ LEFT JOIN user_role ur ON u.id = ur.user_id
+ LEFT JOIN role r ON r.id = ur.user_id
 WHERE
-	u.id = 1
+ u.id = 1
 
 -- 查询登录日志
 SELECT l.login_time
 FROM kz_user u
-	LEFT JOIN kz_login_log l ON l.user_id = u.id
+ LEFT JOIN kz_login_log l ON l.user_id = u.id
 
 ```
 
@@ -670,14 +670,14 @@ DELIMITER $$ -- 写函数之前必须要写,标志
 CREATE FUNCTION mock_data()
 RETURNS INT
 BEGIN
-	DECLARE num INT DEFAULT 1000;
-	DECLARE i INT DEFAULT 0;
+ DECLARE num INT DEFAULT 1000;
+ DECLARE i INT DEFAULT 0;
 
-	WHILE i<num DO
-	INSERT INTO big(`name`,`age`,`phone`) VALUES (CONCAT('用户',i),FLOOR(RAND()*100),CONCAT('15',FLOOR(RAND()*((99999999-100000000)+100000000))));
-		SET i = i+1;
-	END WHILE;
-	RETURN i;
+ WHILE i<num DO
+ INSERT INTO big(`name`,`age`,`phone`) VALUES (CONCAT('用户',i),FLOOR(RAND()*100),CONCAT('15',FLOOR(RAND()*((99999999-100000000)+100000000))));
+  SET i = i+1;
+ END WHILE;
+ RETURN i;
 END;
 
 SELECT mock_data(); -- 执行函数
