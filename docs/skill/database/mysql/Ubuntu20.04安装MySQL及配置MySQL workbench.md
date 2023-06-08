@@ -23,8 +23,16 @@
 \#1
 
     ```bash
-        VALIDATE PASSWORD PLUGIN can be used to test passwords...
-        Press y|Y for Yes, any other key for No: N (选择N ,不会进行密码的强校验)
+	Securing the MySQL server deployment.
+
+	Connecting to MySQL using a blank password.
+
+	VALIDATE PASSWORD COMPONENT can be used to test passwords
+	and improve security. It checks the strength of password
+	and allows the users to set only those passwords which are
+	secure enough. Would you like to setup VALIDATE PASSWORD component?
+
+	Press y|Y for Yes, any other key for No: N (选择N ,不会进行密码的强校验)
     ```
 
 \#2
@@ -49,10 +57,10 @@ Re-enter new password: (重复输入)
   sudo mysql
   ```
 
-- 在sql命令行输入以下命令回车，你就可以把密码改成mynewpassword
+- 在sql命令行输入以下命令回车，你就可以把密码改成 1
 
   ```bash
-  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'mynewpassword';
+  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by '1';
   ```
 
  - 然后重复第二步输入密码即可。
@@ -62,26 +70,43 @@ Re-enter new password: (重复输入)
 ```python
 By default, a MySQL installation has an anonymous user,
 allowing anyone to log into MySQL without having to have
-a user account created for them...
+a user account created for them. This is intended only for
+testing, and to make the installation go a bit smoother.
+You should remove them before moving into a production
+environment.
+
 Remove anonymous users? (Press y|Y for Yes, any other key for No) : N (选择N，不删除匿名用户)
 ```
+翻译过来就是：
+
+默认情况下，MySQL安装有一个匿名用户，允许任何人登录MySQL而不必为他们创建用户账户。这只是为了测试，并使安装进行得更顺利。在进入生产环境之前，您应该删除它们。
 
 \#4
 
 ```python
 Normally, root should only be allowed to connect from
 'localhost'. This ensures that someone cannot guess at
-the root password from the network...
+the root password from the network.
+
 Disallow root login remotely? (Press y|Y for Yes, any other key for No) : N (选择N，允许root远程连接)
 ```
+翻译过来就是：
+
+正常情况下，应该只允许从"localhost"连接。这确保了别人无法从网络上猜出根密码。
 
 \#5
 
 ```python
-By default, MySQL comes with a database named 'test' that
-anyone can access...
-Remove test database and access to it? (Press y|Y for Yes, any other key for No) : N (选择N，不删除test数据库)
+y default, MySQL comes with a database named 'test' that
+anyone can access. This is also intended only for testing,
+and should be removed before moving into a production
+environment.
+
+Remove test database and access to it? (Press y|Y for Yes, any other key for No) :  N (选择N，不删除test数据库)
 ```
+翻译过来就是：
+
+默认情况下，MySQL自带一个名为"test"的数据库，任何人都可以访问。这也只是用于测试，在进入生产环境之前应该删除。
 
 \#6
 
@@ -90,6 +115,9 @@ Reloading the privilege tables will ensure that all changes
 made so far will take effect immediately.
 Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Y (选择Y，修改权限立即生效)
 ```
+翻译过来就是：
+
+重新加载特权表将确保到目前为止所做的所有更改将立即生效。
 
 \#7检查mysql服务状态
 
