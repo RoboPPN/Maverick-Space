@@ -87,8 +87,14 @@ export const resourceData: ResourceCategory[] = [
     ],
   },
   {
-    name: '站点🖥️',
+    name: '在线编程网站🖥️',
     resources: [
+      {
+        name: 'SQL Fiddle',
+        desc: '在线编写SQL代码',
+        logo: '/img/resource/SQL-Fiddle.ico',
+        href: 'http://sqlfiddle.com/',
+      },
      
     ],
   },
