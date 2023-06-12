@@ -1,6 +1,7 @@
 ## 注册ChatGPT账号步骤
 
 ### 第一步 进入OpenAI注册页面
+
 1. [OpenAI登录注册页面链接](https://chat.openai.com/auth/login)
 2. 点击Sign UP进行注册
 ![img error](img/OpenAI_sign-up.png)
@@ -11,6 +12,7 @@
 ![img error](img/手机验证页面.png)
 
 ### 第二步 准备海外手机号码接收短信验证码
+
 1. 先注册一个[sms-activate.org](https://sms-activate.org/)账号
 
 2. 登录之后在选择服务区选中"OpenAI"
@@ -30,6 +32,6 @@
 9. 进入到[ChatGPT 聊天页面](https://chat.openai.com/chat)
 ![img error](img/GPT注册成功.png)
 
-
 ## 参考致谢
+
 - [ChatGPT账号注册手把手教程（最新版）](https://juejin.cn/post/7214512376669175845)

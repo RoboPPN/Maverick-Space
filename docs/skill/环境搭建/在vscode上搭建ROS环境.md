@@ -1,20 +1,25 @@
 ### 安装vscode集成ROS插件
+
 需要安装以下5个插件
- - C/C++
- - CMake
- - CMake Tools
- - Python
- - ROS
+
+- C/C++
+- CMake
+- CMake Tools
+- Python
+- ROS
 
 ### 在vscode上创建ROS功能包
+
 1.选定src文件夹右击----->点击 creat catkin package。
 
 2.在弹出来的框框里面输入功能包的名字以及添加相关依赖。
 
 ### vscode 中编译 ros
+
 快捷键 `ctrl + shift + B` 调用编译，选择:`catkin_make:build`
 
 可以点击配置设置为默认，修改`.vscode/tasks.json` 文件
+
 ```cpp
 {
 // 有关 tasks.json 格式的文档，请参见

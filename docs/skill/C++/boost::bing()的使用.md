@@ -1,11 +1,12 @@
 ## C++ boost::bing()的使用
+
 定义如下函数：
 
 int f(int a, int b)
 {
     return a + b;
 }
- 
+
 int g(int a, int b, int c)
 {
     return a + b + c;

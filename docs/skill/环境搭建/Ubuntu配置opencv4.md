@@ -5,9 +5,7 @@ sidebar_position: 3
 
 本文转载于：[Ubuntu18.04 vscode(c++)配置opencv successful](https://blog.csdn.net/Msyusheng/article/details/110288133)
 
-
 主要是修改三个文档，`launch.json` , `c_cpp_properties.json` , `tasks.json`
-
 
 **1、新建一个cpp文件，保存。**
 
@@ -47,6 +45,7 @@ sidebar_position: 3
     ]
 }
 ```
+
 **5、按键ctrl+shift+P，后输入选择Configure Task，在备选框中选择C/C++:cpp build active file选项，则新建一个tasks.json文件。**
 
 ```cpp
@@ -81,6 +80,7 @@ sidebar_position: 3
      ]
 }
 ```
+
 **6、Ctrl + Shift + P 打开搜索框，键入c++，会出现备选项目，选择图示Edit configurations (JSON)
 并且将c_cpp_properties.json修改为：**
 
@@ -104,6 +104,7 @@ sidebar_position: 3
     "version": 4
 }
 ```
+
 opencv安装的目录要在/usr/local/include里面。
 可以输入命令 ：
 
@@ -114,9 +115,6 @@ ls
 
 结果如下：
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210106155358270.png)
-
-
-
 
 **7、回到测试文件，F5运行如下测试程序：**
 
@@ -138,4 +136,3 @@ int main()
     }
 }
 ```
-

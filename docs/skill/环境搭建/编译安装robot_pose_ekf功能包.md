@@ -1,3 +1,5 @@
+## 使用源码安装
+
 从ros'wiki上下载[robot_pose_ekf](https://github.com/ros-planning/robot_pose_ekf)功能包，放入工作空间后编译出现如下错误：
 
 ```shell
@@ -19,12 +21,12 @@ Invoking "cmake" failed
 
 我的解决方法是从源码安装：
 
-https://aur.archlinux.org/packages/ros-melodic-bfl
-
+<https://aur.archlinux.org/packages/ros-melodic-bfl>
 
 下载压缩包后，解压，进入文件夹 bfl-release-release-melodic-bfl-0.8.0-0
 
 接下来就是经典的安装操作：
+
 ```shell
 mkdir build
 cd build
@@ -34,3 +36,9 @@ sudo make install
 ```
 
 再到工作空间进行编译，编译通过。
+
+## 使用二进制方式安装
+
+```bash
+sudo apt install ros-noetic-robot-pose-ekf
+```
