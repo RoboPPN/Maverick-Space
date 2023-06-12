@@ -1,15 +1,15 @@
 export const Friends: Friend[] = [
   {
+    title: '愧怍',
+    description: '记录所学知识，领略编程之美',
+    website: 'https://kuizuo.cn/',
+    avatar: '/img/friend/kuizuo.png',
+  },
+  {
     title: '峰华前端工程师',
     description: '致力于帮助你以最直观、最快速的方式学会前端开发',
     website: 'https://zxuqian.cn',
     avatar: '/img/friend/zxuqian.png',
-  },
-  {
-    title: 'Mas0n',
-    description: '梦想是咸鱼',
-    website: 'https://blog.shi1011.cn',
-    avatar: '/img/friend/mas0n.png',
   },
   {
     title: 'Jetzihan',

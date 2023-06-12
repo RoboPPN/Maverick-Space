@@ -40,7 +40,7 @@ export const resourceData: ResourceCategory[] = [
       {
         name: 'EMOJI中文网',
         desc: '这是一本全面的EMOJI字典',
-        logo: '/img/resource/emoji.ico',
+        logo: '/img/resource/emoji.png',
         href: 'https://www.emojiall.com/zh-hans',
       },
       {
