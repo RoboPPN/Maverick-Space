@@ -6,6 +6,6 @@ Azure Kinect DK 深度相机实现调幅连续波 (AMCW) 时差测距 (ToF) 原�
 
 ![请添加图片描述](https://docs.microsoft.com/zh-cn/azure/kinect-dk/media/concepts/depth-camera-depth-ir.png)
 
-
 ## 参考致谢
+
 - [Azure Kinect DK 深度相机](https://docs.microsoft.com/zh-cn/azure/kinect-dk/depth-camera)
