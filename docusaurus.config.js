@@ -213,9 +213,9 @@ const config = {
       maxHeadingLevel: 4,
     },
     algolia: {
-      appId: 'GV6YN1ODMO',
-      apiKey: '50303937b0e4630bec4a20a14e3b7872',
-      indexName: 'kuizuo',
+      appId: 'Z3H6A8HS26',
+      apiKey: '77530df7de3835650923382b75318a8f',
+      indexName: 'PPN',
     },
     zoom: {
       selector: '.markdown :not(em) > img',
