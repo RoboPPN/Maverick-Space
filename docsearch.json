@@ -1,5 +1,5 @@
 {
-  "index_name": "kuizuo",
+  "index_name": "ppn_index",
   "start_urls": ["https://roboppn.top/"],
   "sitemap_urls": ["https://roboppn.top/sitemap.xml"],
   "selectors": {
