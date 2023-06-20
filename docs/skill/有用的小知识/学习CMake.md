@@ -194,6 +194,63 @@ set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 
 之后可以直接对生成的程序使用 gdb 来调试。
 
+## ROS CMakeLists.txt代码示例
+
+```shell
+#指定构建ROS软件包所需的最低CMake
+cmake_minimum_required(VERSION 2.8.3)
+#定义ROS功能包的名称
+project(charge_ppn)
+
+## 编译为 C++11，支持 ROS Kinetic 和更新版本
+add_compile_options(-std=c++11)
+
+# 查找catkin宏和库
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+  std_msgs
+  scout_msgs
+  message_generation
+  yaml-cpp
+)
+
+
+add_message_files(
+  FILES
+  ChargeData.msg
+)
+
+## 使用此处列出的任何依赖项生成添加的消息和服务
+ generate_messages(
+   DEPENDENCIES
+   std_msgs
+ )
+
+catkin_package(
+#  INCLUDE_DIRS include
+#  LIBRARIES charge_ppn
+ CATKIN_DEPENDS  roscpp rospy std_msgs  scout_msgs message_runtime
+#  DEPENDS system_lib
+)
+
+###########
+## 编译 ##
+###########
+
+include_directories(
+  include
+  ${catkin_INCLUDE_DIRS}
+)
+
+add_executable(charge_info_gat_and_set src/charge_info_get_and_set.cpp)
+
+target_link_libraries(charge_info_gat_and_set
+  ${catkin_LIBRARIES}
+  ${YAML_CPP_LIBRARIES}
+)
+```
+
 ## 学习链接
 
 - [CMake 入门实战](https://www.hahack.com/codes/cmake#%E5%B0%86%E5%85%B6%E4%BB%96%E5%B9%B3%E5%8F%B0%E7%9A%84%E9%A1%B9%E7%9B%AE%E8%BF%81%E7%A7%BB%E5%88%B0-CMake)
