@@ -47,6 +47,18 @@ sudo apt install kazam
 
 ![img error](img/Kazam.png)
 
+## 视频和音频解码器
+
+```bash
+sudo apt-get install ubuntu-restricted-extras 
+```
+
+## vlc视频播放器
+
+```bash
+sudo apt-get  install  vlc
+```
+
 ## scp 传输文件指令
 
 ```bash
