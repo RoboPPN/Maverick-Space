@@ -69,6 +69,15 @@ ubuntu-restricted-extras 是一个包含各种基本软件，如 Flash 插件、
 sudo apt-get install ubuntu-restricted-extras 
 ```
 
+## QT
+
+终端输入该行代码，自动下载最新版本：
+
+```bash
+sudo apt-get update
+sudo apt-get install qt5-default qtcreator
+```
+
 ## scp 传输文件指令
 
 ```bash
