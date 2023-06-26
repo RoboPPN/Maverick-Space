@@ -47,16 +47,26 @@ sudo apt install kazam
 
 ![img error](img/Kazam.png)
 
-## 视频和音频解码器
-
-```bash
-sudo apt-get install ubuntu-restricted-extras 
-```
-
 ## vlc视频播放器
+
+对于视频文件，你可以在 Ubuntu 上安装 VLC。VLC 是 Linux 上的最佳视频播放器之一，它几乎可以播放任何视频文件格式。
 
 ```bash
 sudo apt-get  install  vlc
+```
+
+## 音视频解码器
+
+但你仍然会遇到无法播放音频和 flash 的麻烦。
+
+好消息是 Ubuntu 提供了一个软件包来安装所有基本的媒体编解码器：ubuntu-restricted-extras。
+
+ubuntu-restricted-extras 是一个包含各种基本软件，如 Flash 插件、unrar、gstreamer、mp4、Ubuntu 中的 Chromium 浏览器的编解码器等的软件包。
+
+可以使用以下命令安装：
+
+```bash
+sudo apt-get install ubuntu-restricted-extras 
 ```
 
 ## scp 传输文件指令
