@@ -78,6 +78,21 @@ sudo apt-get update
 sudo apt-get install qt5-default qtcreator
 ```
 
+## 串口调试工具---cutecom
+
+cutecom是一个拥有可视化界面的串口调试助手。
+1、安装cutecom
+
+```bash
+sudo apt-get install cutecom
+```
+
+2、运行cutecom
+
+```bash
+sudo cutecom
+```
+
 ## scp 传输文件指令
 
 ```bash
