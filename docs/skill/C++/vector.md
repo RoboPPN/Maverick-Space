@@ -27,7 +27,7 @@ C++ 默认构造函数std::vector::vector()构造一个空容器，元素为零�
 int main(void) {
 
     // 创建一个名为vec的vector
-    std::vector<int> vec;	//默认构造
+    std::vector<int> vec; //默认构造
 
     // vec.size() 的作用是：返回vec中的元素个数
     std::cout << "size of vec = " << vec.size() << std::endl;
@@ -41,8 +41,6 @@ int main(void) {
 ```python
 size of vec = 0
 ```
-
-
 
 #### 2、填充构造，构造一个包含n元素的容器，并将value分配给每个元素
 
@@ -58,7 +56,7 @@ C++ 填充构造函数std::vector::vector()构造一个大小为 n 的容器并�
 
 int main(void) {
 
-    std::vector<int> vec(5,100);	//填充构造
+    std::vector<int> vec(5,100); //填充构造
 
     for(int i = 0; i < vec.size(); ++i){
         std::cout<<vec[i]<<std::endl;
@@ -110,7 +108,7 @@ int main(void) {
         vec[i] = i+1;
     }
 
-    std::vector<int> vec2(vec.begin(),vec.end());	//范围构造
+    std::vector<int> vec2(vec.begin(),vec.end()); //范围构造
 
     for(int i = 0; i<vec2.size(); i++){
         std::cout<< vec2[i]<<std::endl;
@@ -227,7 +225,7 @@ vec_2:100
 
 int main(void) {
 
-    auto list = {5,4,3,2,1};	//使用了自动类型推导
+    auto list = {5,4,3,2,1}; //使用了自动类型推导
 
     std::vector<int> vec(list);
 
@@ -294,7 +292,7 @@ int main(void) {
 
 返回值：如果 n 是有效的向量索引，则从指定位置返回一个元素。
 
-​				如果向量对象是常量，则返回常量引用，否则返回非常量引用。
+​    如果向量对象是常量，则返回常量引用，否则返回非常量引用。
 
 异常：如果 n 无效索引 out_of_bound 抛出异常。
 
@@ -333,7 +331,7 @@ int main(void) {
 
 返回值：返回 vector 最后一个元素。
 
-​				如果 vector 对象是常量，则方法返回常量引用，否则返回非常量引用。
+​    如果 vector 对象是常量，则方法返回常量引用，否则返回非常量引用。
 
 时间复杂度：O(1)
 
@@ -430,9 +428,7 @@ int main(void) {
 5
 ```
 
-#### 
-
-
+####
 
 #### 6、vector::capacity() 返回分配存储的大小，以元素表示
 
@@ -615,7 +611,7 @@ using namespace std;
 int main(void) {
    vector<int> v = {1, 2, 3, 4, 5};
 
-   cout << "First element of vector = " << v.front() << endl;	//输出第一个元素
+   cout << "First element of vector = " << v.front() << endl; //输出第一个元素
 
    return 0;
 }
@@ -661,8 +657,6 @@ int main(void) {
 2
 ```
 
-
-
 #### 12、vector::push_back() 在向量末尾插入新元素并将向量的大小增加一
 
 时间复杂度：O(1)
@@ -699,9 +693,7 @@ int main(void) {
 5
 ```
 
-
-
-#### 13、vector::resize() 改变向量的大小。
+#### 13、vector::resize() 改变向量的大小
 
 如果 n 小于当前大小，则销毁额外的元素。
 
@@ -841,8 +833,6 @@ v1 and v2 are not equal
 #### 5、operator >测试第一个向量是否大于其他向量
 
 #### 6、operator >= 测试第一个向量是否大于或等于其他向量
-
-
 
 ### 使用vector注意事项
 
