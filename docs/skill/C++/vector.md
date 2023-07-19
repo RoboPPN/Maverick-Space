@@ -1,121 +1,848 @@
-## 什么是vector？
+## vector简介
 
-**Vector(向量)**是一个封装了动态大小数组的顺序容器。跟任意其它类型容器一样，它能够存放各种类型的对象。可以简单的认为，向量是一个能够存放任意类型的**动态数组**。
+向量是可以改变大小的序列容器。 容器是保存相同类型数据的对象。 序列容器严格按线性顺序存储元素。
 
-## vector特性
+Vector 将元素存储在连续的内存位置，并允许使用下标运算符 [] 直接访问任何元素。 与数组不同，vector 可以在运行时根据需要收缩或扩展。 向量的存储是自动处理的。
 
-### 1、顺序特性
+为了在运行时支持收缩和扩展功能，向量容器可能会分配一些额外的存储空间以适应可能的增长，因此容器的实际容量大于大小。 因此，与数组相比，vector 消耗更多的内存来换取管理存储和以高效方式动态增长的能力。
 
-顺序容器中的元素按照严格的线性顺序排序,可通过元素在序列中的位置访问对应的元素。
+零大小的向量也是有效的。 在这种情况下，vector.begin() 和 vector.end() 指向相同的位置。 但是调用 front() 或 back() 的行为是未定义的。
 
-### 2、动态数组
+## vector函数用法以及具体实现方式
 
-支持对序列中的任意元素进行快速直接访问，甚至可以通过指针算述进行该操作,提供了在序列末尾相对快速地添加/删除元素的操作。
+### 构造函数
 
-### 3、能够感知内存分配器
+#### 1、默认构造，构造一个包含零个元素的空容器
 
-容器使用一个内存分配器对象来动态地处理它的存储需求。
+C++ 默认构造函数std::vector::vector()构造一个空容器，元素为零。
 
-## 基本函数实现
+时间复杂度：O(1)
 
-### 1.构造函数
+代码如下：
 
-- `vector()`​:创建一个空vector；
-- `vector(int nSize)`​:创建一个vector,元素个数为nSize；
-- `vector(int nSize,const t& t)`​:创建一个vector，元素个数为nSize,且值均为t；
-- `vector(const vector&)`​:复制构造函数；
-- `vector(begin,end)`​:复制[begin,end)区间内另一个数组的元素到vector中；
+```cpp
+#include <iostream>
+#include <vector>
 
-### 2.增加函数
+int main(void) {
 
-- `void push_back(const T& x)​`:向量尾部增加一个元素 X ；
-- ​`iterator insert(iterator it,const T& x)`​:向量中迭代器指向元素前增加一个元素 x ；
-- `iterator insert(iterator it,int n,const T& x)​`:向量中迭代器指向元素前增加n个相同的元素 x ；
-- `iterator insert(iterator it,const_iterator first,const_iterator last)`​:向量中迭代器指向元素前插入另一个相同类型向量的[first,last)间的数据；
+    // 创建一个名为vec的vector
+    std::vector<int> vec;	//默认构造
 
-### 3.删除函数
+    // vec.size() 的作用是：返回vec中的元素个数
+    std::cout << "size of vec = " << vec.size() << std::endl;
 
-- `iterator erase(iterator it)`​:删除向量中迭代器指向元素；
-- `iterator erase(iterator first,iterator last)`​:删除向量中[first,last)中元素；
-- `void pop_back()`​:删除向量中最后一个元素；
-- `void clear()`​:清空向量中所有元素；
+    return 0;
+}
+```
 
-### 4.遍历函数
+终端输出如下：
 
-- `reference at(int pos)`​:返回pos位置元素的引用；
-- `reference front()`​:返回首元素的引用；
-- `reference back()`​:返回尾元素的引用；
-- `iterator begin(`)​:返回向量头指针，指向第一个元素；
-- `iterator end()`​:返回向量尾指针，指向向量最后一个元素的下一个位置；
-- `reverse_iterator rbegin()`​:反向迭代器，指向最后一个元素；
-- `reverse_iterator rend()`​:反向迭代器，指向第一个元素之前的位置；
+```python
+size of vec = 0
+```
 
-+
 
-#### 5.判断函数
 
-- `bool empty()`:判断向量是否为空，若为空，则向量中无元素；
+#### 2、填充构造，构造一个包含n元素的容器，并将value分配给每个元素
 
-#### 6.大小函数
+C++ 填充构造函数std::vector::vector()构造一个大小为 n 的容器并将值 value (如果有提供的话) 分配给容器的每个元素。
 
-- `int size()` :返回向量中元素的个数；
-- `int capacity()` :返回当前向量所能容纳的最大元素值；
-- `int max_size()` :返回最大可允许的 vector 元素数量值；
+时间复杂度：O(n)
 
-#### 7.其他函数
+代码如下：
 
-- `void swap(vector&)`​:交换两个同类型向量的数据；
-- `void assign(int n,const T& x)`​:设置向量中前n个元素的值为x；
-- `void assign(const_iterator first,const_iterator last)`​:向量中[first,last)；中元素设置成当前向量元素
+```cpp
+#include <iostream>
+#include <vector>
 
-#### 8.总结vector常用函数
+int main(void) {
 
-:::note vector常用函数
-1.push_back 在数组的最后添加一个数据；
+    std::vector<int> vec(5,100);	//填充构造
 
-2.pop_back 去掉数组的最后一个数据；
+    for(int i = 0; i < vec.size(); ++i){
+        std::cout<<vec[i]<<std::endl;
+    }
 
-3.at 得到编号位置的数据；
+    return 0;
+}
+```
 
-4.begin 得到数组头的指针；
+终端输出如下：
 
-5.end 得到数组的最后一个单元+1的指针；
+```bash
+100
+100
+100
+100
+100
+```
 
-6．front 得到数组头的引用；
+如将上面代码`std::vector<int> vec(5,100);`更改为`std::vector<int> vec(5);`,则终端输出如下：
 
-7.back 得到数组的最后一个单元的引用；
+```bash
+0
+0
+0
+0
+0
+```
 
-8.max_size 得到 vector 最大可以是多大；
+可看出如没有填充value值的话，默认用0填充容器。
 
-9.capacity 当前 vector 分配的大小；
+#### 3、范围构造，构造一个容器，其中包含 first 到 last 范围内的尽可能多的元素
 
-10.size 当前使用数据的大小；
+C++ 范围构造函数std::vector::vector()构造一个容器，其中包含 first 到 last 范围内的尽可能多的元素。
 
-11.resize 改变当前使用数据的大小，如果它比当前使用的大，者填充默认值；
+时间复杂度：O(n)
 
-12.reserve 改变当前 vector 所分配空间的大小；
+代码如下：
 
-13.erase 删除指针指向的数据项；
+```cpp
+#include <iostream>
+#include <vector>
 
-14.clear 清空当前的 vector ；
+int main(void) {
 
-15.rbegin 将 vector 反转后的开始指针返回(其实就是原来的end-1)；
+    std::vector<int> vec(5);
 
-16.rend 将 vector 反转构的结束指针返回(其实就是原来的begin-1)；
+    for(int i = 0; i < vec.size(); ++i){
+        vec[i] = i+1;
+    }
 
-17.empty 判断 vector 是否为空；
+    std::vector<int> vec2(vec.begin(),vec.end());	//范围构造
 
-18.swap 与另一个 vector 交换数据；
-:::
+    for(int i = 0; i<vec2.size(); i++){
+        std::cout<< vec2[i]<<std::endl;
+    }
 
-### 简单介绍
+    return 0;
+}
+```
 
-- Vector<类型>标识符；
-- Vector<类型>标识符(最大容量)；
-- Vector<类型>标识符(最大容量,初始所有值)；
-- Int i[5]={1,2,3,4,5}；
-- Vector<类型>vi(I,i+2);得到i索引值为3以后的值；
-- Vector< vector< int> >v; 二维向量这里最外的`<>`要有空格。否则在比较旧的编译器下无法通过；
+终端输出如下：
+
+```bash
+1
+2
+3
+4
+5
+```
+
+#### 4、复制构造构造一个容器，其中包含现有容器 x中存在的每个元素的副本
+
+时间复杂度：O(n)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main(void) {
+
+    std::vector<int> vec(5);
+
+    for(int i = 0; i < vec.size(); ++i){
+        vec[i] = i+1;
+    }
+
+    std::vector<int> vec2(vec); //复制构造
+
+    for(int i = 0; i<vec2.size(); i++){
+        std::cout<< vec2[i]<<std::endl;
+    }
+
+    return 0;
+}
+```
+
+输出如下：
+
+```bash
+1
+2
+3
+4
+5
+```
+
+#### 5、移动构造，使用move语义构造具有other内容的容器
+
+时间复杂度：O(n)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main(void) {
+
+    std::vector<int> vec_1(5,100);
+    std::cout<<"未开始移动构造前的输出如下:"<<std::endl;
+    for(int i = 0; i < vec_1.size(); ++i){
+        std::cout<<"vec_1:"<<vec_1[i]<<std::endl;
+    }
+    std::cout<<"开始移动构造的输出如下:"<<std::endl;
+    std::vector<int> vec_2(move(vec_1)); //复制构造函数
+    for(int i = 0; i < vec_1.size(); ++i){
+        std::cout<<"vec_1:"<<vec_1[i]<<std::endl;
+    }
+    for(int i = 0; i < vec_2.size(); ++i){
+        std::cout<<"vec_2:"<<vec_2[i]<<std::endl;
+    }
+
+    return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+未开始移动构造前的输出如下:
+vec_1:100
+vec_1:100
+vec_1:100
+vec_1:100
+vec_1:100
+开始移动构造后的输出如下:
+vec_2:100
+vec_2:100
+vec_2:100
+vec_2:100
+vec_2:100
+```
+
+#### 6、从初始化列表构造一个容器
+
+时间复杂度：O(n)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main(void) {
+
+    auto list = {5,4,3,2,1};	//使用了自动类型推导
+
+    std::vector<int> vec(list);
+
+    for(int i = 0; i < vec.size(); ++i){
+        std::cout<<"vec:"<<vec[i]<<std::endl;
+    }
+
+    return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+vec:5
+vec:4
+vec:3
+vec:2
+vec:1
+```
+
+### 成员函数
+
+#### 1、vector::assign  通过替换旧值为向量元素分配新值
+
+时间复杂度：O(n)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   /* Create empty vector */
+   vector<int> v;
+   /* create initializer list */
+   auto il = {1, 2, 3, 4, 5};
+
+   /* assign values from initializer list */
+   v.assign(il);
+
+  /* display vector elements */
+  for (int i = 0; i < v.size(); ++i)
+      cout << v[i] << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```python
+1
+2
+3
+4
+5
+```
+
+#### 2、vector()::at() 返回对向量中位置n处元素的引用
+
+返回值：如果 n 是有效的向量索引，则从指定位置返回一个元素。
+
+​				如果向量对象是常量，则返回常量引用，否则返回非常量引用。
+
+异常：如果 n 无效索引 out_of_bound 抛出异常。
+
+时间复杂度：O(1)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   auto il = {1, 2, 3, 4, 5};
+   vector<int> v(il);
+
+   for (int i = 0; i < v.size(); ++i)
+      cout << v.at(i) << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+1
+2
+3
+4
+5
+```
+
+#### 3、vector::back 返回对向量最后一个元素的引用
+
+返回值：返回 vector 最后一个元素。
+
+​				如果 vector 对象是常量，则方法返回常量引用，否则返回非常量引用。
+
+时间复杂度：O(1)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   auto il = {1, 2, 3, 4, 5};
+   vector<int> v(il);
+
+   cout << "Last element of vector = " << v.back() << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+Last element of vector = 5
+```
+
+#### 4、vector::begin 返回指向向量第一个元素的随机访问迭代器
+
+时间复杂度：O(1)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   auto il = {1, 2, 3, 4, 5};
+   vector<int> v(il);
+
+   for (auto it = v.begin(); it != v.end(); ++it)
+      cout << *it << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+1
+2
+3
+4
+5
+```
+
+#### 5、vector::end 返回一个迭代器，它指向向量容器中的past-the-end 元素
+
+past-the-end 元素是向量中最后一个元素。
+
+返回值：返回vector中末尾元素的迭代器。
+
+时间复杂度：O(1)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   vector<int> v = {1, 2, 3, 4, 5};
+
+   for (auto it = v.begin(); it != v.end(); ++it)
+      cout << *it << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+1
+2
+3
+4
+5
+```
+
+#### 
+
+
+
+#### 6、vector::capacity() 返回分配存储的大小，以元素表示
+
+这个容量不一定等于向量的大小。它可以等于或大于向量大小。
+
+向量大小的理论限制由成员max_size给出。
+
+返回值：返回分配存储的大小，以向量可容纳的元素个数表示。
+
+时间复杂度：O(1)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   vector<int> v;
+
+   for (int i = 0; i < 5; ++i)
+      v.push_back(i + 1);
+
+   cout << "Number of elements in vector = " << v.size() << endl;
+   cout << "Capacity of vector           = " << v.capacity() << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+Number of elements in vector = 5
+Capacity of vector           = 8
+```
+
+#### 7、vector::clear 通过从向量中删除所有元素并将向量的大小设置为零来销毁向量
+
+时间复杂度：O(n)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   auto ilist = {1, 2, 3, 4, 5};
+   vector<int> v(ilist);
+
+   cout << "Initial size of vector     = " << v.size() << endl;
+   /* destroy vector */
+   v.clear();
+   cout << "Size of vector after clear = " << v.size() << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+Initial size of vector     = 5
+Size of vector after clear = 0
+```
+
+#### 8、vector::empty() 测试向量是否为空
+
+返回值：如果向量为空，则返回true，否则返回false
+
+时间复杂度：O(1)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   vector<int> v;
+
+   if (v.empty())
+      cout << "Vector v1 is empty" << endl;
+
+   v.push_back(1);
+   v.push_back(2);
+   v.push_back(3);
+
+   if (!v.empty())
+      cout << "Vector v1 is not empty" << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+Vector v1 is empty
+Vector v1 is not empty
+```
+
+#### 9、 vector::erase() 从向量中删除单个元素
+
+返回值：返回一个随机访问迭代器。
+
+异常：如果位置无效，则行为undefined
+
+时间复杂度：O(n)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+    vector<int> v = {1, 2, 3, 4, 5};
+
+    cout << "Original vector" << endl;
+    for (auto it = v.begin(); it != v.end(); ++it)
+        cout << *it << endl;
+
+    v.erase(v.begin());  //删除单个元素
+
+    cout << "Modified vector" << endl;
+    for (auto it = v.begin(); it != v.end(); ++it)
+        cout << *it << endl;
+
+    v.erase(v.begin(), v.begin() + 2);   //删除范围元素
+
+    cout << "Modified vector" << endl;
+    for (auto it = v.begin(); it != v.end(); ++it)
+        cout << *it << endl;
+
+    return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+Original vector
+1
+2
+3
+4
+5
+Modified vector
+2
+3
+4
+5
+Modified vector
+4
+5
+```
+
+#### 10、vector::front() 返回对向量第一个元素的引用
+
+时间复杂度：O(1)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   vector<int> v = {1, 2, 3, 4, 5};
+
+   cout << "First element of vector = " << v.front() << endl;	//输出第一个元素
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+First element of vector = 1
+```
+
+#### 11、vector::pop_back() 从向量中删除最后一个元素并将向量的大小减小一
+
+时间复杂度：O(1)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   vector<int> v = {1, 2, 3, 4, 5};
+
+   /* 删除3次末尾元素 */
+   v.pop_back();
+   v.pop_back();
+   v.pop_back();
+
+   for (int i = 0; i < v.size(); ++i)
+      cout << v[i] << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+1
+2
+```
+
+
+
+#### 12、vector::push_back() 在向量末尾插入新元素并将向量的大小增加一
+
+时间复杂度：O(1)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   vector<int> v;
+
+   /* Insert 5 elements */
+   for (int i = 0; i < 5; ++i)
+      v.push_back(i + 1);
+
+   for (int i = 0; i < v.size(); ++i)
+      cout << v[i] << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+1
+2
+3
+4
+5
+```
+
+
+
+#### 13、vector::resize() 改变向量的大小。
+
+如果 n 小于当前大小，则销毁额外的元素。
+
+如果 n 大于当前容器大小，则在向量末尾插入新元素。
+
+如果指定了value值，那么新元素将使用value进行初始化。
+
+时间复杂度：O(n)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   vector<int> v;
+
+   cout << "Initial vector size = " << v.size() << endl;
+
+   v.resize(5, 10);
+   cout << "Vector size after resize = " << v.size() << endl;
+
+   cout << "Vector contains following elements" << endl;
+   for (int i = 0; i < v.size(); ++i)
+      cout << v[i] << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+Initial vector size = 0
+Vector size after resize = 5
+Vector contains following elements
+10
+10
+10
+10
+10
+```
+
+#### 14、vector::swap() 交换两个向量的内容
+
+时间复杂度：O(1)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+    vector<int> v1;
+    vector<int> v2 = {1, 2, 3, 4, 5};
+
+    v1.swap(v2);
+
+    cout << "Vector v1 contains:" << endl;
+    for (int i = 0; i < v1.size(); ++i)
+        cout << v1[i] << endl;
+
+    cout << "Vector v2 contains:" << endl;
+    for (int i = 0; i < v2.size(); ++i)
+        cout << v2[i] << endl;
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+Vector v1 contains:
+1
+2
+3
+4
+5
+Vector v2 contains:
+```
+
+### 非成员重载函数
+
+#### 1、operator == 测试两个向量是否相等
+
+返回值：如果两个向量相等，则返回true,否则返回false
+
+时间复杂度：O(n)
+
+代码如下：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+   vector<int> v1;
+   vector<int> v2;
+
+   if (v1 == v2)
+      cout << "v1 and v2 are equal" << endl;
+
+   v1.resize(10, 100);
+
+   if (!(v1 == v2))
+      cout << "v1 and v2 are not equal" << endl;
+
+   return 0;
+}
+```
+
+终端输出如下：
+
+```bash
+v1 and v2 are equal
+v1 and v2 are not equal
+```
+
+#### 2、operator != 测试两个向量是否相等
+
+返回值：如果两个向量不相等，则返回true,否则返回false
+
+时间复杂度：O(n)
+
+#### 3、operator < 测试第一个向量是否小于其他向量
+
+#### 4、operator <= 测试第一个向量是否小于或等于其他向量
+
+#### 5、operator >测试第一个向量是否大于其他向量
+
+#### 6、operator >= 测试第一个向量是否大于或等于其他向量
+
+
 
 ### 使用vector注意事项
 
@@ -128,32 +855,6 @@ double Distance(vector<int>&a, vector<int>&b)
 ```
 
  其中的“&”绝对不能少！！！
-
-### 基本操作
-
-1. 使用vector需包括头文件​`#include<vector>​`
-
-2. 创建vector对象​：`vector<int> vec​`
-
-3. 去掉尾部最后一个数据：`vec.pop_back();`
-
-4. 尾部插入数字：​`vec.push_back(6)​`
-
-5. 使用下标访问元素：`​cout<<vec[0]<<endl​;`
-
-    记住下标是从0开始的。
-
-6. 插入元素：​`vec.insert(vec.begin()+i,a)​;`
-
-   在第i+1个元素前面插入a。
-
-7. 删除元素：`​vec.erase(vec.begin()+2)​;`
-
-   删除第3个元素。
-
-8. vector容器实际数据个数: `​vec.size()​`
-
-9. 清空: ​`vec.clear();​`
 
 ### 排序
 
