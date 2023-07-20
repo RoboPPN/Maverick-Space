@@ -2,14 +2,18 @@
 
 定义如下函数：
 
+```cpp
 int f(int a, int b)
 {
     return a + b;
 }
+```
 
+```cpp
 int g(int a, int b, int c)
 {
     return a + b + c;
 }
+```
 
-boost::bind(f, 1, 2)可以产生一个无参函数对象，返回f(1, 2)；类似的，boost::bind(g, 1, 2, 3)相当于g(1, 2, 3)
+`boost::bind(f, 1, 2)`可以产生一个无参函数对象，返回`f(1, 2)`类似的，`boost::bind(g, 1, 2, 3)`相当于`g(1, 2, 3)`
