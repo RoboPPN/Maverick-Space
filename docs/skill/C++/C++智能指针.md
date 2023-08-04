@@ -81,9 +81,9 @@ private:
 
 需要注意的是，C++11引入了标准库中的`std::shared_ptr`，它的实现可能与上述示例代码有所不同，且更加复杂和高效。上述代码只是为了展示`std::shared_ptr`的基本实现原理。
 
-## shared_ptr<T>模板类提供的成员方法
+## `shared_ptr<T>`模板类提供的成员方法
 
-![error](./img/shared_ptr常用成员方法.png)
+![error](img/shared_ptr常用成员方法.png)
 
 - `operator=()`: 重载赋值号，使得同一类型的`shared_ptr`智能指针可以相互赋值。
 
