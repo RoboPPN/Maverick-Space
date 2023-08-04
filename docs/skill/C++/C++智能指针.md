@@ -179,11 +179,11 @@ private:
 
   3、将`TestPoint`类的构造函数和析构函数定义移到类外部实现。
 
-​ Q: 如果将上述代码：std::shared_ptr<TestPoint> ptr = std::make_shared<TestPoint>();   改成      std::shared_ptr<TestPoint> ptr ;   会有什么样的结果？
+​Q: 如果将上述代码：`std::shared_ptr<TestPoint> ptr = std::make_shared<TestPoint>();`   改成      `std::shared_ptr<TestPoint> ptr;`   会有什么样的结果？
 
-​ A: 会导致指针ptr没有有效地指向一个对象。这将产生以下结果：当尝试通过`ptr->get_number(3);`调用指针的成员函数时，会出现未定义行为，因为`ptr`为空指针，没有有效对象可调用成员函数。
+​A: 会导致指针ptr没有有效地指向一个对象。这将产生以下结果：当尝试通过`ptr->get_number(3);`调用指针的成员函数时，会出现未定义行为，因为`ptr`为空指针，没有有效对象可调用成员函数。
 
-### make_shared函数
+### `make_shared()`函数
 
 最安全的分配和使用动态内存的方法是调用一个名为`make_shared`的标准库函数。
 
@@ -424,7 +424,7 @@ Girl 构造函数
 |  expired()  | 判断当前 weak_ptr 指针为否过期（指针为空，或者指向的堆内存已经被释放）。 |
 |   lock()    | 如果当前 weak_ptr 已经过期，则该函数会返回一个空的 shared_ptr 指针；反之，该函数返回一个和当前 weak_ptr 指向相同的 shared_ptr 指针。 |
 
-operator=()、swap()、reset()、use_count()成员方法和shared_ptr<T>方法一样，我主要来讲讲expired()以及lock()这两个成员方法。
+operator=()、swap()、reset()、use_count()成员方法和`shared_ptr<T>`方法一样，我主要来讲讲expired()以及lock()这两个成员方法。
 
 1、`expired()`: `expired()`函数用于判断当前`weak_ptr`指针是否过期，即指针为空或者指向的堆内存已经被释放。如果返回值为`true`，表示指针已过期；如果返回值为`false`，表示指针仍然有效。
 
