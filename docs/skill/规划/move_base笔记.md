@@ -13,8 +13,6 @@
 
 总体来说，`move_base`框架将导航问题分解为全局规划和局部规划两个层次，通过Action通信机制和参数服务器，整合了多个组件，使得机器人能够在未知环境中规划路径，并通过局部规划器实现障碍物避开，最终实现自主导航。该框架可以方便地与不同类型的底盘和传感器集成，适用于各种移动机器人的导航控制需求。
 
-
-
 ## 局部规划器
 
 局部规划器是导航系统中的另一个重要组件，它的主要作用是在机器人移动过程中实时避开动态障碍物，沿着全局规划器生成的高层路径进行局部导航。局部规划器负责在机器人行进过程中实时规划低层次的轨迹，以避开障碍物，并保持机器人在全局路径上的正确方向。
@@ -60,8 +58,6 @@ Trajectory Rollout Controller是move_base中的一个重要控制器，它的主
 
 **总结**： Trajectory Rollout Controller是move_base中的一个重要控制器，负责将局部规划器生成的轨迹信息转换为底盘控制器可以理解的速度指令。它通过轨迹插值和轨迹跟踪控制实现机器人的平滑导航，同时支持适配不同类型的底盘控制器，使move_base可以在不同类型的机器人上运行。
 
-
-
 ## Action服务器
 
 在move_base中，Action服务器（Action Server）是一个核心组件，负责接收导航目标请求，执行路径规划和机器人移动，并发布导航状态和反馈信息。Action服务器使用ROS的actionlib库来实现，提供了一种灵活和高效的机制，以便在机器人导航过程中进行交互和状态反馈。
@@ -86,8 +82,6 @@ Trajectory Rollout Controller是move_base中的一个重要控制器，它的主
 
 **总结**： Action服务器在move_base中是一个核心组件，负责接收导航目标请求，执行路径规划和机器人移动，并发布导航状态和反馈信息。通过ROS的actionlib库，Action服务器和Action客户端之间可以实现灵活和高效的通信，从而实现机器人的导航功能。
 
-
-
 # 代码详解
 
 在`move_base.h`文件中首先就做如下声明：
@@ -98,22 +92,16 @@ typedef actionlib::SimpleActionServer<move_base_msgs::MoveBaseAction> MoveBaseAc
 
 代码中的 `typedef` 创建了一个别名 `MoveBaseActionServer`，用于 `actionlib::SimpleActionServer<move_base_msgs::MoveBaseAction>` 这个类型，这个类型是一个用于ROS中的简单行动服务器（Simple Action Server）。行动服务器用于执行ROS中定义的行动（Action）。在这里，`move_base_msgs::MoveBaseAction` 是一个 MoveBase 行动的消息类型，这通常用于导航功能中的目标点导航。
 
-
-
-
-
 ## move_base_msgs::MoveBaseAction消息为
 
 ```cpp
 geometry_msgs/PoseStamped target_pose   //目标
 ---
 ---
-geometry_msgs/PoseStamped base_position		//反馈
+geometry_msgs/PoseStamped base_position  //反馈
 ```
 
 target_pose`是`导航堆栈尝试实现的目标。作为反馈给出的base_position是[tf](http://wiki.ros.org/tf)报告的机器人在世界中的当前`位置`。对于[move_base](http://wiki.ros.org/move_base)节点，当尝试实现目标时，target_pose会投影到 XY 平面，且 Z 轴朝上。
-
-
 
 ## move_base_msgs::MoveBaseActionGoal消息为
 
@@ -121,18 +109,14 @@ target_pose`是`导航堆栈尝试实现的目标。作为反馈给出的base_po
 [actionlib_msgs/GoalID](https://docs.ros.org/en/fuerte/api/actionlib_msgs/html/msg/GoalID.html) goal_id
 [move_base_msgs/MoveBaseGoal](https://docs.ros.org/en/fuerte/api/move_base_msgs/html/msg/MoveBaseGoal.html) goal
 
-​	[geometry_msgs/PoseStamped](https://docs.ros.org/en/fuerte/api/geometry_msgs/html/msg/PoseStamped.html) target_pose
+​ [geometry_msgs/PoseStamped](https://docs.ros.org/en/fuerte/api/geometry_msgs/html/msg/PoseStamped.html) target_pose
 
-​		[std_msgs/Header](https://docs.ros.org/en/fuerte/api/std_msgs/html/msg/Header.html) header
+​  [std_msgs/Header](https://docs.ros.org/en/fuerte/api/std_msgs/html/msg/Header.html) header
 
-​		[geometry_msgs/Pose](https://docs.ros.org/en/fuerte/api/geometry_msgs/html/msg/Pose.html) pose
+​  [geometry_msgs/Pose](https://docs.ros.org/en/fuerte/api/geometry_msgs/html/msg/Pose.html) pose
 
-​			[geometry_msgs/Point](https://docs.ros.org/en/fuerte/api/geometry_msgs/html/msg/Point.html) position
-​			[geometry_msgs/Quaternion](https://docs.ros.org/en/fuerte/api/geometry_msgs/html/msg/Quaternion.html) orientation
-
-
-
-
+​   [geometry_msgs/Point](https://docs.ros.org/en/fuerte/api/geometry_msgs/html/msg/Point.html) position
+​   [geometry_msgs/Quaternion](https://docs.ros.org/en/fuerte/api/geometry_msgs/html/msg/Quaternion.html) orientation
 
 ```cpp
 as_ = new MoveBaseActionServer(ros::NodeHandle(), "move_base", [this](auto& goal){ executeCb(goal); }, false);
@@ -150,25 +134,15 @@ as_ = new MoveBaseActionServer(ros::NodeHandle(), "move_base", [this](auto& goal
 
 这种Lambda表达式的写法使得回调函数定义更加紧凑，更方便地使用类的成员函数作为回调处理收到的目标。
 
-
-
 `std::isfinite(param)`该函数的作用是，如果输入param是有限的，返回true，反之是无限或者NAN值返回false。
 
 `std::isfinite(q.x)`如果q.x是有限的，返回true。否则，返回false。
-
-
-
-
 
 ## 区域锁的用法
 
 `boost::recursive_mutex::scoped_lock lock(lock_);`
 
 区域锁生效范围是一个区域，通常用在用中括号{ }括起来的代码块，区域锁只需在代码块第一行进行上锁，无需解锁，因为区域锁的离开作用域即无效。
-
-
-
-
 
 ## ActionServer的setAbortes()函数
 
@@ -193,10 +167,6 @@ void SimpleActionServer<ActionSpec>::setAborted(const Result & result, const std
 
 总的来说，这个函数用于在Action服务器中设置当前目标的状态为"Aborted"，以告知客户端（Action Client）当前目标的执行已经被中止，并可以提供一些额外的信息来描述中止原因。这样，Action客户端就可以根据目标状态做出相应的处理。
 
-
-
-
-
 ## move_base的`actionlib::SimpleActionServer<move_base_msgs::MoveBaseAction>`对象在move_base节点中做了什么，有什么作用
 
 在`move_base`节点中，`actionlib::SimpleActionServer<move_base_msgs::MoveBaseAction>`对象起到了实现导航功能的关键作用。`move_base`节点是ROS中用于导航机器人的核心节点，它负责规划和控制机器人在环境中的移动，使其能够到达目标位置。
@@ -211,10 +181,6 @@ void SimpleActionServer<ActionSpec>::setAborted(const Result & result, const std
 
 通过使用`actionlib::SimpleActionServer<move_base_msgs::MoveBaseAction>`对象，`move_base`节点能够以Action的形式实现导航功能，使得导航请求和导航过程的控制更加灵活和可靠。同时，Action机制还能够处理目标的取消、超时等情况，使得`move_base`节点在复杂环境中能够高效地规划和控制机器人的导航行为。
 
-
-
-
-
 ## 想要通过move_base控制机器人移动，有哪几种给出目标点的方法？
 
 通过move_base控制机器人移动，可以使用以下几种方法给出目标点：
@@ -225,7 +191,6 @@ void SimpleActionServer<ActionSpec>::setAborted(const Result & result, const std
 4. **使用RViz交互：** 在RViz中，可以使用2D Nav Goal工具来交互式地设置机器人的目标点。在RViz中点击地图上的某个位置，然后将其作为导航目标点发送给move_base。
 
 无论使用哪种方法，目标点的信息都应该包含目标的坐标和方向，以便机器人能够正确地导航到指定的位置。这些方法在ROS中非常常用，可以根据具体需求选择合适的方式来控制机器人的移动。
-
 
 上面4中方法各自的优缺点是什么？
 
@@ -244,17 +209,15 @@ void SimpleActionServer<ActionSpec>::setAborted(const Result & result, const std
 
 综合来看，选择合适的方法取决于具体的导航需求和应用场景。如果是简单的导航任务，可以选择直接发布导航目标点消息或使用RViz交互；如果需要更高级的导航功能和实时反馈，可以选择使用Action客户端；而如果需要更灵活的导航控制，可以使用服务接口。根据任务的复杂程度和功能要求，选择最适合的方法可以提高导航的效率和可靠性。
 
-
-
 ## move_base Recovery机制
 
 move_base三种状态：
 
 ```cpp
   enum MoveBaseState {
-    PLANNING,	//规划中
-    CONTROLLING,	//控制中
-    CLEARING	//规划或者控制失败在恢复或者清除中
+    PLANNING, //规划中
+    CONTROLLING, //控制中
+    CLEARING //规划或者控制失败在恢复或者清除中
   };
 ```
 
@@ -269,9 +232,9 @@ move_base为recovery行为定义了如下三种原因:
 ```cpp
   enum RecoveryTrigger
   {
-    PLANNING_R,	//全局规划失败
-    CONTROLLING_R,	//局部规划失败
-    OSCILLATION_R	//长时间困在一片小区域
+    PLANNING_R, //全局规划失败
+    CONTROLLING_R, //局部规划失败
+    OSCILLATION_R //长时间困在一片小区域
   };
 ```
 
@@ -297,7 +260,7 @@ move_base为recovery行为定义了如下三种原因:
 （2）
 
         //check if we've tried to make a plan for over our time limit or our maximum number of retries
-     	//issue #496: we stop planning when one of the conditions is true, but if max_planning_retries_
+      //issue #496: we stop planning when one of the conditions is true, but if max_planning_retries_
         //is negative (the default), it is just ignored and we have the same behavior as ever
     
         lock.lock();
@@ -334,12 +297,11 @@ move_base为recovery行为定义了如下三种原因:
     
           }
 
-
 恢复机制有哪些？
 三种终止方式
 
     if(recovery_trigger_ == CONTROLLING_R){
-    	ROS_ERROR("Aborting because a valid control could not be found. Even after executing all recovery behaviors");
+     ROS_ERROR("Aborting because a valid control could not be found. Even after executing all recovery behaviors");
         as_->setAborted(move_base_msgs::MoveBaseResult(), "Failed to find a valid control. Even after executing recovery behaviors.");
           }
     
@@ -366,14 +328,6 @@ move_base为recovery行为定义了如下三种原因:
 private_nh.param("planner_patience", planner_patience_, 5.0);
 ```
 
-
-
-
-
-
-
-
-
 ## move_base如何更换全局、局部路径规划算法（start、Dijkstra、DWA，TEB）？并测试各算法的计算时长，效果展示图
 
 move_base包默认算法：
@@ -382,25 +336,17 @@ move_base包默认算法：
 
 2、局部路径规划：Trajectory rollout----轨迹推算
 
-
-
 ### move_base框架图
 
 ![image-20230824114815859](img/image-20230824114815859.png)
 
-​																								基于move_base的导航框架
-
-
+​                        基于move_base的导航框架
 
 ![img](https://img-blog.csdnimg.cn/59c5194694d744dab5e4cea1d9b12457.png)
 
-
-
-
-
 ### navigation导航包的navfn和global_planner的关系
 
-Q:在目前的ROS版本中，机器人全局路径规划使用的是navfn包，这在move_base节点中的构造函数中可以找到：`    private_nh.param("base_global_planner", global_planner, std::string("navfn/NavfnROS"));`而在navigation的源代码中还有一个global_planner的包，该包的源文件夹`navigation\global_planner\src `下已经有了A,Dijkstra等算法的实现。可是navfn的源程序中也有这两个算法的实现，貌似根本就没用到global_planner这个文件夹下的源程序。因此最开始直接看用于move_base全局导航的程序时有点一头雾水，为什么有两个用于全局导航的包在ROS里面？到底这两个包navfn和global_planner是什么关系？
+Q:在目前的ROS版本中，机器人全局路径规划使用的是navfn包，这在move_base节点中的构造函数中可以找到：`private_nh.param("base_global_planner", global_planner, std::string("navfn/NavfnROS"));`而在navigation的源代码中还有一个global_planner的包，该包的源文件夹`navigation\global_planner\src`下已经有了A,Dijkstra等算法的实现。可是navfn的源程序中也有这两个算法的实现，貌似根本就没用到global_planner这个文件夹下的源程序。因此最开始直接看用于move_base全局导航的程序时有点一头雾水，为什么有两个用于全局导航的包在ROS里面？到底这两个包navfn和global_planner是什么关系？
 
 A: 可以将navfn包和global_planner包理解成一个并列关系，因为他们两个都是用来做全局规划的，两个包里面也都实现了A,Dijkstra算法。那是不是意味着这两者中的一个包就是多余的呢？其实不是，早期的开发中是用navfn包做导航的，那时候并没有global_planner这个包，并且在navfn的源代码里可以看到这个包默认是使用Dijkstra做全局路径规划，并且有A的代码，那为什么没有使用A呢？幸好有人在[ROS answers里问了这个问题](https://answers.ros.org/question/28366/why-navfn-is-using-dijkstra/)，也引来了众开发者回答：
 
@@ -409,23 +355,21 @@ A: 可以将navfn包和global_planner包理解成一个并列关系，因为他�
 
 看了里面的帖子，其中有说到：“曼哈顿距离启发式实时生成最佳路径。然而，这只在没有或很少有静态障碍物的情况下才成立。随着障碍物的大小和数量的增加，A*不仅花费更多的时间来搜索但也需要更多的节点内存，因为它需要更多的节点来找到路径。”
 
-​																															----出自论文《EFFICIENT PATH FINDING FOR 2D GAMES》
+​                               ----出自论文《EFFICIENT PATH FINDING FOR 2D GAMES》
 
 ### 更换全局路径规划算法
 
-#### 方法一：
+#### 方法一
 
 在ros-noetic版本的navigation导航包中，move_base默认使用的全局规划器是NavfnROS，如下图所示。它位于navfn功能包下的navfn_ros.cpp文件下。
 
-![image-20230824120125636](/home/agx-ppn/.config/Typora/typora-user-images/image-20230824120125636.png)
+![image-20230824120125636](img/image-20230824120125636.png)
 
-![image-20230824133822570](/home/agx-ppn/.config/Typora/typora-user-images/image-20230824133822570.png)
+![image-20230824133822570](img/image-20230824133822570.png)
 
 想要使用navfn功能包更改全局规划算法，可在navfn_ros.cpp中的选择`planner_->calcNavFnAstar()`执行的A*代码或者`planner_->calcNavFnDijkstra(true)`执行的Dijkstra算法。
 
 我的笔记本处理器为i5-1240P x 16，内容为16g，在运行turtlebot3仿真时尽量控制其他变量不变（如：步长、机器人朝向等）。
-
-
 
 使用A*算法的运行速度为：0.16左右
 
@@ -437,25 +381,23 @@ A: 可以将navfn包和global_planner包理解成一个并列关系，因为他�
 
 两者大差不差。
 
-
-
-#### 方法二：
+#### 方法二
 
 1、更改规划器
 
 在move_base节点的构造函数中选择global_planner功能包里面的GlobalPlanner作为全局规划器
 
-![image-20230824155009470](/home/agx-ppn/.config/Typora/typora-user-images/image-20230824155009470.png)
+![image-20230824155009470](img/image-20230824155009470.png)
 
 如果想要更方便的更改选择规划器，则可以在move_base.launch文件中添加如下代码：
 
-![image-20230824155819842](/home/agx-ppn/.config/Typora/typora-user-images/image-20230824155819842.png)
+![image-20230824155819842](img/image-20230824155819842.png)
 
 2、修改planner_core.cpp文件
 
  planner_core.cpp文件是navigation包中的文件，它位于`navigation/global_planner/src/`目录下：
 
-![image-20230824160607237](/home/agx-ppn/.config/Typora/typora-user-images/image-20230824160607237.png)
+![image-20230824160607237](img/image-20230824160607237.png)
 
 修改如下内容：
 
@@ -469,15 +411,13 @@ private_nh.param("use_dijkstra", use_dijkstra, false);
 
 再加上相对应的ROS_INFO内容，就可以在程序运行时查看自己使用的是Dijkstra还是A*算法。
 
-![image-20230824161437211](/home/agx-ppn/.config/Typora/typora-user-images/image-20230824161437211.png)
-
-
+![image-20230824161437211](img/image-20230824161437211.png)
 
 ### 发现的问题
 
 在使用`global_planner/GlobalPlanner`规划器的时候，使用A*算法会出现如下错误：
 
-![image-20230824143546371](/home/agx-ppn/.config/Typora/typora-user-images/image-20230824143546371.png)
+![image-20230824143546371](img/image-20230824143546371.png)
 
 出现上述原因是因为膨胀半径设置问题，需要自己设置，最简单方法是将膨胀半径设置为机器人外切圆。---来自csdn  [Charlesffff](https://blog.csdn.net/weixin_44190648)的解释和解决方案[链接在此](https://blog.csdn.net/weixin_44190648/article/details/131113449)
 
@@ -485,7 +425,7 @@ private_nh.param("use_dijkstra", use_dijkstra, false);
 
 “曼哈顿距离启发式实时生成最佳路径。然而，这只在没有或很少有静态障碍物的情况下才成立。随着障碍物的大小和数量的增加，A*不仅花费更多的时间来搜索但也需要更多的节点内存，因为它需要更多的节点来找到路径。”
 
-​																															----出自论文《EFFICIENT PATH FINDING FOR 2D GAMES》
+​                               ----出自论文《EFFICIENT PATH FINDING FOR 2D GAMES》
 
 ## 参考文章
 
@@ -493,29 +433,21 @@ private_nh.param("use_dijkstra", use_dijkstra, false);
 - [ROS：move_base路径规划介绍、更换全局路径规划算法](https://blog.csdn.net/weixin_44190648/article/details/131113449)
 - [ROS: global_planner 整体解析](https://blog.csdn.net/heyijia0327/article/details/45030929)
 
-
-
-
-
 ### 更换局部路径规划算法
 
-#### 方法一：
+#### 方法一
 
 在move_base.launch文件中修改base_local_planner参数。
 
-![image-20230824172222272](/home/agx-ppn/.config/Typora/typora-user-images/image-20230824172222272.png)
+![image-20230824172222272](img/image-20230824172222272.png)
 
-#### 方法二：
+#### 方法二
 
 直接在move_base节点中的构造函数中修改，如下`private_nh.param("base_local_planner", local_planner, std::string("dwa_local_planner/DWAPlannerROS"));`
-
-
 
 ### 更换局部路径规划算法为Teb算法
 
 在navigation导航包中，默认提供的有`base_local_planner/TrajectoryPlannerROS`轨迹推算以及`dwa_local_planner/DWAPlannerROS` DWA算法，那如何向里面添加其他的局部规划算法呢？
-
-
 
 #### 实操环节
 
@@ -555,7 +487,7 @@ teb_local_planner /home/catkin_navigation/src/navigation/teb_local_planner-melod
 roslaunch teb_local_planner test_optim_node.launch
 ```
 
-![image-20230825104258998](/home/agx-ppn/.config/Typora/typora-user-images/image-20230825104258998.png)
+![image-20230825104258998](img/image-20230825104258998.png)
 
 7、在**turtlebot3_navigation/param**文件夹下创建teb_local_planner_params.yaml文件：
 
@@ -659,17 +591,11 @@ TebLocalPlannerROS:
 
 在move_base.launch文件中添加teb配置如下红框中的内容：
 
-![image-20230825104753249](/home/agx-ppn/.config/Typora/typora-user-images/image-20230825104753249.png)
-
-
+![image-20230825104753249](img/image-20230825104753249.png)
 
 9、效果展示
 
-![image-20230825104958168](/home/agx-ppn/.config/Typora/typora-user-images/image-20230825104958168.png)
-
-
-
-
+![image-20230825104958168](img/image-20230825104958168.png)
 
 #### 为什么在turtlebot3仿真中使用TEB算法后机器人快要到目标点时需要经过多次调整才能到达最终位姿？使用DWA算法就很快到达指定位姿，且调整效率比TEB要高
 
@@ -685,12 +611,8 @@ DWA
 
 如果目标点在机器人的侧方，机器人则会先调整姿态至目标点位置（注意：不是目标点姿态），以机器人中心和目标点生成一条直线路径，在行驶过去，到达目标点再调整姿态至目标姿态。
 
-
-
 TEB
 
 在使用TEB算法时，机器人总是会先调整至目标点位置朝向，再行驶至目标点位置。
-
-
 
 TEB的局部路径线要比DWA的要长很多。
