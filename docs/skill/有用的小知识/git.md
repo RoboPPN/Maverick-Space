@@ -39,3 +39,11 @@ git clone -b lesson-2 https://github.com/hemiahwu/vue-basic-playlist.git
 ```
 
 原文链接：<https://blog.csdn.net/weixin_43324273/article/details/105687801>
+
+## git配置克隆下来的代码仓库
+
+```bash
+git config user.name <你的github用户名>
+
+git config user.email <你的邮箱>
+```
