@@ -42,6 +42,12 @@ git clone -b lesson-2 https://github.com/hemiahwu/vue-basic-playlist.git
 
 ## git配置克隆下来的代码仓库
 
+在将代码克隆下来打算在VSCode上提交修改，出现的错误如下：
+
+```bash
+请确保已在Git中配置您的"user.name"和"user.email"
+```
+
 ```bash
 git config user.name <你的github用户名>
 
