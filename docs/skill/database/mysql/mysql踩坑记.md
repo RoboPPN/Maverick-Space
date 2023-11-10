@@ -195,3 +195,11 @@ mysql> CREATE TABLE students (    -> student_id INT UNSIGNED,    -> name VARCHAR
 5. HeidiSQL：适用于Windows的免费开源MySQL管理工具，具有用户友好的界面、SQL编辑器和数据浏览器。
 
 这些工具提供了更便捷的方式来编写和管理MySQL数据库，它们通常具有语法高亮、代码补全、查询执行计划、数据可视化等功能，提高了开发和管理的效率。
+
+## 数据库存储中文方法
+
+在创建数据库时加上DEFAULT CHARACTER SET utf8，例如：
+
+```sql
+create database if not exists maverick_data DEFAULT CHARACTER SET utf8;
+```
