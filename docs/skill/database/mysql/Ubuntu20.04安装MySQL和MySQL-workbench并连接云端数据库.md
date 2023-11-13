@@ -22,7 +22,7 @@
 
 \#1
 
-    ```bash
+```bash
  Securing the MySQL server deployment.
 
  Connecting to MySQL using a blank password.
@@ -33,7 +33,7 @@
  secure enough. Would you like to setup VALIDATE PASSWORD component?
 
  Press y|Y for Yes, any other key for No: N (选择N ,不会进行密码的强校验)
-    ```
+```
 
 \#2
 
