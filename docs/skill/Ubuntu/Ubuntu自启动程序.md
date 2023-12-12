@@ -141,7 +141,13 @@ python final.py
    - `User`: 指定服务以哪个用户的身份运行。
    - `WantedBy`: 指定服务的启动目标。在这个例子中，服务会在 multi-user.target 启动。
 
-2. 启用服务：使用以下命令启用服务：
+2. 重新加载systemd管理器配置
+
+   ```bash
+   sudo systemctl daemon-reload
+   ```
+
+3. 启用服务：使用以下命令启用服务：
 
    ```bash
    sudo systemctl enable your_service_name.service
@@ -149,7 +155,7 @@ python final.py
 
    这会在系统启动时自动启动该服务。
 
-3. 启动服务：手动启动服务以测试：
+4. 启动服务：手动启动服务以测试：
 
    ```bash
    sudo systemctl start your_service_name.service
@@ -161,7 +167,7 @@ python final.py
    sudo systemctl status your_service_name.service
    ```
 
-4. 重启服务
+5. 重启服务
 
    ```bash
    sudo systemctl restart your_service_name.service
