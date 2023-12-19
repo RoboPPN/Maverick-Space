@@ -223,11 +223,11 @@ sudo apt -f install
     def connect():
         try:
             connection = pymysql.connect(
-                host='139.9.70.16',  # 连接名称，默认127.0.0.1
-                user='navis',  # 用户名
+                host='111.111.11.1',  # 连接名称，默认127.0.0.1
+                user='ppn',  # 用户名
                 passwd='1',  # 密码
                 port=3306,  # 端口，默认为3306
-                db='navis_data',  # 数据库名称
+                db='ppn_data',  # 数据库名称
                 charset='utf8'  # 字符编码
             )
             connection.close()
