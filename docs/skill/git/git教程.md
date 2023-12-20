@@ -53,3 +53,7 @@ git config user.name <你的github用户名>
 
 git config user.email <你的邮箱>
 ```
+
+## 参考致谢
+
+- [Git教程-廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/896043488029600)
