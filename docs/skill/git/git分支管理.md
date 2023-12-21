@@ -17,14 +17,14 @@
 
 ## 创建与合并分支
 
-- 查看分支：`git branch`
-- 创建分支：`git branch <name>`
-- 切换分支：`git checkout <name>` 或者 `git switch <name>`
-- 创建+切换分支：`git checkout -b <name>` 或者 `git switch -c <name>`
-- 合并某分支到当前分支：`git merge <name>` && `git push`
+- **查看分支**：`git branch`
+- **创建分支**：`git branch <name>`
+- **切换分支**：`git checkout <name>` 或者 `git switch <name>`
+- **创建+切换分支**：`git checkout -b <name>` 或者 `git switch -c <name>`，该命令只是创建了本地的分支，但并没有创建远程仓库中的同名分支。要创建远程仓库中的分支，还需执行`git push -u origin <name>`
+- **合并某分支到当前分支**：`git merge <name>` && `git push`
 - 合并分支时，加上`--no-ff`参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
-- 删除分支：`git branch -d <name>`
-- 强行删除分支：`git branch -D <new-branch-name>`
+- **删除分支**：`git branch -d <name>`,该命令只是删除了本地的分支，但并没有删除远程仓库中的同名分支。要删除远程仓库中的分支，还需执行`git push --delete dev`，最后，执行`git fetch --prune`来同步远程分支信息到本地，确保不再显示已删除的远程分支。
+- **强行删除分支**：`git branch -D <new-branch-name>`
   对于创建的新分支，如果新分支还未合并到主分支，但领导说停止该分支的开发，如果使用`git branch -d`来删除的话，会出现：
 
   ```bash
