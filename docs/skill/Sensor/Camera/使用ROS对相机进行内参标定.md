@@ -25,10 +25,11 @@ sudo apt-get install ros-melodic-camera-calibration
 这个功能包里面封装了对摄像头参数标定的一个通用的算法。
 
 这个功能包使用时需要配合一个棋盘格标定靶一起使用（棋盘格标定靶如下图
-![请添加图片描述](https://img-blog.csdnimg.cn/60c361a1014a4efc899bcb400a151a38.png)
+
+![请添加图片描述](img/标定靶.png)
 
 标定基本流程：将摄像头看到的标定靶的图像跟真实的正方形的尺寸进行对比，对摄像头的各个硬件参数去做标定。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201118213735642.png)
+![在这里插入图片描述](img/摄像头标定流程.png)
 
 ```cpp
 注：square这个参数需根据现实你测量的标定靶的边长而定。
@@ -46,7 +47,7 @@ roslaunch robot_vision usb_cam.launch
 rosrun camera_calibration cameracalibrator.py --size 12x14 --square 0.012 image:=/usb_cam/image_raw camera:=/usb_cam
 ```
 
-启动标定包后会出现以下界面![在这里插入图片描述](https://img-blog.csdnimg.cn/20201214220353542.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NlbmlvckM=,size_16,color_FFFFFF,t_70)
+启动标定包后会出现以下界面![在这里插入图片描述](img/标定实操图片.png)
 以下对图中出现的X、Y、Size、Skew进行解释
 
 ```cpp
