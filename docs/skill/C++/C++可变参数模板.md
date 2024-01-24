@@ -8,7 +8,7 @@
 
 让我们考虑一个示例，您需要一个 log() 可以接受可变数量参数并将它们打印到控制台的函数。例如：
 
-```c++
+```cpp
 log(1, 4.3, "Hello");
 log('a', "test", 78, 5);
 
@@ -26,7 +26,7 @@ log(3, obj);
 
 为了满足第一点要求，我们通常会使用模板函数，代码如下：
 
-```c++
+```cpp
 template<typename T>
 void log(T obj) 
 {
@@ -40,7 +40,7 @@ void log(T obj)
 
 可以接受任意数量参数的函数定义如下：
 
-```c++
+```cpp
 template<typename T, typename... Args>
 void log(T first, Args... args);
 ```
@@ -51,7 +51,7 @@ void log(T first, Args... args);
 
 定义可变参数模板函数可能很棘手，因为你无法直接访问可变数量的参数。因此你需要将递归与C++的类型推导机制一起使用：
 
-```C++
+```cpp
 template<typename T, typename... Args>
 void log(T first, Args... args) 
 {
@@ -67,9 +67,9 @@ void log(T first, Args... args)
 **代码解释：**
 
 - `template<typename T, typename... Args>`：这是一个模板声明，它引入了两个模板参数 T 和 Args 。 T 是第一个参数的类型，而 Args 是剩余参数的类型包（即可变参数）。
-- `void log(T first, Args... args) `：log函数的声明，它接受一个 first 的参数，它是参数包的第一个元素，以及一个可变参数包 args ，用于处理额外的参数。
+- `void log(T first, Args... args)`：log函数的声明，它接受一个 first 的参数，它是参数包的第一个元素，以及一个可变参数包 args ，用于处理额外的参数。
 - `std::cout << first << " , ";`：将第一个参数 first 打印出来。
-- `if constexpr (sizeof...(args) > 0) `:这是一个编译时的条件语句，用于检查可变参数包 args 中是否还有其他参数。 sizeof...(args) 返回参数包中的参数数量。如果数量大于零，那么进入条件块。这种实现方式利用了 C++17 引入的 if constexpr 特性，使得编译器在编译时可以选择性的包含或排除某些代码块，而不是在运行时进行条件检查。
+- `if constexpr (sizeof...(args) > 0)`:这是一个编译时的条件语句，用于检查可变参数包 args 中是否还有其他参数。 sizeof...(args) 返回参数包中的参数数量。如果数量大于零，那么进入条件块。这种实现方式利用了 C++17 引入的 if constexpr 特性，使得编译器在编译时可以选择性的包含或排除某些代码块，而不是在运行时进行条件检查。
 - `log(args...);`：在条件块内，递归调用 log 函数，处理剩余的可变参数。
 
 **它的工作原理如下：**
@@ -96,7 +96,7 @@ void log(T first, Args... args)
 
 以下是编写和使用log()函数的方法：
 
-```C++
+```cpp
 #include <iostream>
 
 // 结束可变参数模板函数递归的函数
@@ -136,7 +136,7 @@ int main()
 
 **输出：**
 
-```C++
+```cpp
 1 , 4.3 , Hello
 a , test , 78 , 5
 sample , test
